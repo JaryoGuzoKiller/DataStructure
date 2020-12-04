@@ -37,7 +37,7 @@ public:
 			while (curNode != NULL) {
 				saveNode = curNode;
 				if (curNode->data == inputData) {
-					cout << "�ߺ�" << endl;
+					cout << "Áßº¹" << endl;
 					break;
 				}
 				else if (curNode->data > inputData) {
