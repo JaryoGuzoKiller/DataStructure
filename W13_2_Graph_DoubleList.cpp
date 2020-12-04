@@ -36,7 +36,7 @@ public:
 	}
 };
 
-class DoublyVertexLinkedList {	//vertex·Î ÀÌ·ç¾îÁø ÀÌÁß¿¬°á¸®½ºÆ®
+class DoublyVertexLinkedList {	//vertexë¡œ ì´ë£¨ì–´ì§„ ì´ì¤‘ì—°ê²°ë¦¬ìŠ¤íŠ¸
 public:
 	vertex* head;
 	vertex* tail;
@@ -79,7 +79,7 @@ public:
 	}
 };
 
-class DoublyEdgeLinkedList {		//edge·Î ÀÌ·ç¾îÁø ÀÌÁß¿¬°á¸®½ºÆ®
+class DoublyEdgeLinkedList {		//edgeë¡œ ì´ë£¨ì–´ì§„ ì´ì¤‘ì—°ê²°ë¦¬ìŠ¤íŠ¸
 public:
 	edge* head;
 	edge* tail;
@@ -132,13 +132,13 @@ public:
 
 class Graph {
 public:
-	edge*** edgeMatrix;						//edgeÁ¤º¸¸¦ °ü¸®ÇÏ´Â matrix
-	DoublyVertexLinkedList* VertexList;		//ÀüÃ¼ vertexÁ¤º¸¸¦ °ü¸®ÇÏ´Â ÀÌÁß¿¬°á¸®½ºÆ®
-	DoublyEdgeLinkedList* EdgeList;			//ÀüÃ¼ edgeÁ¤º¸¸¦ °ü¸®ÇÏ´Â ÀÌÁß¿¬°á¸®½ºÆ®
+	edge*** edgeMatrix;						//edgeì •ë³´ë¥¼ ê´€ë¦¬í•˜ëŠ” matrix
+	DoublyVertexLinkedList* VertexList;		//ì „ì²´ vertexì •ë³´ë¥¼ ê´€ë¦¬í•˜ëŠ” ì´ì¤‘ì—°ê²°ë¦¬ìŠ¤íŠ¸
+	DoublyEdgeLinkedList* EdgeList;			//ì „ì²´ edgeì •ë³´ë¥¼ ê´€ë¦¬í•˜ëŠ” ì´ì¤‘ì—°ê²°ë¦¬ìŠ¤íŠ¸
 	int vertexSize;
-	//±×·¡ÇÁ¿¡ Á¸ÀçÇÏ´Â vertexÀÇ °³¼ö
-	int mappingTable[MappingSize];			// vertexÀÇ °íÀ¯ÇÑ ¹øÈ£¿Í 
-											// ÇØ´ç veretxÀÇ matrix¿¡¼­ index·Î ¸ÅÇÎ
+	//ê·¸ë˜í”„ì— ì¡´ì¬í•˜ëŠ” vertexì˜ ê°œìˆ˜
+	int mappingTable[MappingSize];			// vertexì˜ ê³ ìœ í•œ ë²ˆí˜¸ì™€ 
+											// í•´ë‹¹ veretxì˜ matrixì—ì„œ indexë¡œ ë§¤í•‘
 
 	Graph() {
 		this->VertexList = new DoublyVertexLinkedList();
@@ -150,7 +150,7 @@ public:
 		this->edgeMatrix[0][0] = NULL;
 		int edgeSize = 0;
 	}
-	bool isfindVertex(int n) {		// VertexList¿¡¼­ °íÀ¯ÇÑ ¹øÈ£°¡ nÀÎ vertexÀÇ Á¸Àç À¯¹« °Ë»ç
+	bool isfindVertex(int n) {		// VertexListì—ì„œ ê³ ìœ í•œ ë²ˆí˜¸ê°€ nì¸ vertexì˜ ì¡´ì¬ ìœ ë¬´ ê²€ì‚¬
 		bool flag = false;
 		vertex* temp = VertexList->head;
 		while (temp != NULL) {
@@ -162,8 +162,8 @@ public:
 		}
 		return flag;
 	}
-	vertex* findVertex(int n) {				// VertexList¿¡¼­ °íÀ¯ÇÑ ¹øÈ£°¡ nÀÎ 
-		vertex* temp = VertexList->head;    //vertexÀÇ ÁÖ¼Ò ¹İÈ¯
+	vertex* findVertex(int n) {				// VertexListì—ì„œ ê³ ìœ í•œ ë²ˆí˜¸ê°€ nì¸ 
+		vertex* temp = VertexList->head;    //vertexì˜ ì£¼ì†Œ ë°˜í™˜
 		while (temp != NULL) {
 			if (temp->data == n) {
 				break;
@@ -173,15 +173,15 @@ public:
 		return temp;
 	}
 
-	void insert_vertex(int n) {			// ±×·¡ÇÁ¿¡ °íÀ¯ÇÑ ¹øÈ£°¡ nÀÎ vertex »ğÀÔ
+	void insert_vertex(int n) {			// ê·¸ë˜í”„ì— ê³ ìœ í•œ ë²ˆí˜¸ê°€ nì¸ vertex ì‚½ì…
 		if (isfindVertex(n) == true) {
 			return;
 		}
 
 		else {
-			edge*** tempMatrix = new edge * *[vertexSize + 1];  //Á¤Á¡ÀÌ 1°³ Ãß°¡µÉ ¶§¸¶´Ù 
-			for (int i = 0; i < vertexSize + 1; i++) {        //±âÁ¸ matrixº¸´Ù °¡·Î, ¼¼·Î ±æÀÌ°¡ 1¸¸Å­ 
-				tempMatrix[i] = new edge * [vertexSize + 1];	  //´õ Å« tempmatrix »ı¼º
+			edge*** tempMatrix = new edge * *[vertexSize + 1];  //ì •ì ì´ 1ê°œ ì¶”ê°€ë  ë•Œë§ˆë‹¤ 
+			for (int i = 0; i < vertexSize + 1; i++) {        //ê¸°ì¡´ matrixë³´ë‹¤ ê°€ë¡œ, ì„¸ë¡œ ê¸¸ì´ê°€ 1ë§Œí¼ 
+				tempMatrix[i] = new edge * [vertexSize + 1];	  //ë” í° tempmatrix ìƒì„±
 				for (int j = 0; j < vertexSize + 1; j++) {
 					tempMatrix[i][j] = NULL;
 				}
@@ -189,13 +189,13 @@ public:
 
 			for (int i = 0; i < vertexSize; i++) {
 				for (int j = 0; j < vertexSize; j++) {
-					tempMatrix[i][j] = this->edgeMatrix[i][j];	 //elementµé  copy
+					tempMatrix[i][j] = this->edgeMatrix[i][j];	 //elementë“¤  copy
 				}
 			}
 
 			//for (int i = 0; i < vertexSize; i++) {
 			//	
-			//		delete this->edgeMatrix[i];	 //elementµé  copy
+			//		delete this->edgeMatrix[i];	 //elementë“¤  copy
 			//	
 			//}
 			//delete this->edgeMatrix;
@@ -203,14 +203,14 @@ public:
 			this->edgeMatrix = tempMatrix;
 
 			vertex* newVertex = new vertex(n);
-			VertexList->insert(newVertex);						//VertexList¿¡ °íÀ¯¹øÈ£°¡ nÀÎ vertex Ãß°¡
+			VertexList->insert(newVertex);						//VertexListì— ê³ ìœ ë²ˆí˜¸ê°€ nì¸ vertex ì¶”ê°€
 			this->vertexSize++;
-			mappingTable[vertexSize - 1] = n;					// mappingtable¿¡ vertex ÀÚ½ÅÀÌ 
-		}														//matrixÀÇ ¾î´À indexÀÎÁö ÀúÀå
+			mappingTable[vertexSize - 1] = n;					// mappingtableì— vertex ìì‹ ì´ 
+		}														//matrixì˜ ì–´ëŠ indexì¸ì§€ ì €ì¥
 	}
 
 
-	void erase_vertex(int n) {                          // ±×·¡ÇÁ¿¡ °íÀ¯ÇÑ ¹øÈ£°¡ nÀÎ vertex Á¦°Å
+	void erase_vertex(int n) {                          // ê·¸ë˜í”„ì— ê³ ìœ í•œ ë²ˆí˜¸ê°€ nì¸ vertex ì œê±°
 		if (isfindVertex(n) == false) {
 			cout << -1 << endl;
 			return;
@@ -220,9 +220,9 @@ public:
 			return;
 		}
 		else {
-			edge*** tempMatrix = new edge * *[vertexSize - 1]; //Á¤Á¡ÀÌ 1°³ »èÁ¦µÉ ¶§¸¶´Ù
-			for (int i = 0; i < vertexSize - 1; i++) {       //±âÁ¸ matrixº¸´Ù °¡·Î, ¼¼·Î ±æÀÌ°¡ 1¸¸Å­
-				tempMatrix[i] = new edge * [vertexSize - 1];   //´õ ÀÛÀº tempmatrix »ı¼º
+			edge*** tempMatrix = new edge * *[vertexSize - 1]; //ì •ì ì´ 1ê°œ ì‚­ì œë  ë•Œë§ˆë‹¤
+			for (int i = 0; i < vertexSize - 1; i++) {       //ê¸°ì¡´ matrixë³´ë‹¤ ê°€ë¡œ, ì„¸ë¡œ ê¸¸ì´ê°€ 1ë§Œí¼
+				tempMatrix[i] = new edge * [vertexSize - 1];   //ë” ì‘ì€ tempmatrix ìƒì„±
 				for (int j = 0; j < vertexSize - 1; j++) {
 					tempMatrix[i][j] = NULL;
 				}
@@ -230,20 +230,20 @@ public:
 
 			int middleIdx = 0;
 			for (int i = 0; i < vertexSize; i++) {
-				if (mappingTable[i] == n)middleIdx = i;		//middleidx: »èÁ¦ÇÒ vertexÀÇ matrix¿¡¼­ÀÇ ÀÎµ¦½º
+				if (mappingTable[i] == n)middleIdx = i;		//middleidx: ì‚­ì œí•  vertexì˜ matrixì—ì„œì˜ ì¸ë±ìŠ¤
 			}
 			for (int i = middleIdx; i < vertexSize; i++) {	// mappingtable update
 				mappingTable[i] = mappingTable[i + 1];
 			}
 
 
-			for (int i = 0; i < vertexSize; i++) {			//EdgeList¿¡¼­ °íÀ¯¹øÈ£°¡ nÀÎ vertex¿Í ¿¬°áµÈ ¸ğµç edgeµé Á¦°Å
+			for (int i = 0; i < vertexSize; i++) {			//EdgeListì—ì„œ ê³ ìœ ë²ˆí˜¸ê°€ nì¸ vertexì™€ ì—°ê²°ëœ ëª¨ë“  edgeë“¤ ì œê±°
 				if (this->edgeMatrix[middleIdx][i] != NULL) {
 					EdgeList->remove(this->edgeMatrix[middleIdx][i]);
 				}
 			}
 
-			for (int i = 0; i < vertexSize; i++) {			//middleidx¸¦ ±âÁ¡À¸·Î elementµéÀ» ÀûÀıÈ÷ copy
+			for (int i = 0; i < vertexSize; i++) {			//middleidxë¥¼ ê¸°ì ìœ¼ë¡œ elementë“¤ì„ ì ì ˆíˆ copy
 				for (int j = 0; j < vertexSize; j++) {
 					if (i < middleIdx && j < middleIdx) {
 						tempMatrix[i][j] = this->edgeMatrix[i][j];
@@ -260,7 +260,7 @@ public:
 				}
 			}
 			this->edgeMatrix = tempMatrix;
-			VertexList->remove(findVertex(n));			//VertexList¿¡ °íÀ¯¹øÈ£°¡ nÀÎ vertex Á¦°Å
+			VertexList->remove(findVertex(n));			//VertexListì— ê³ ìœ ë²ˆí˜¸ê°€ nì¸ vertex ì œê±°
 			this->vertexSize--;
 
 		}
