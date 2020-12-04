@@ -21,7 +21,7 @@ public:
 	void front();
 	void rear();
 	int size() {
-		return (r - f + 1 + capacity) % capacity;//n�� �� �ȵɱ�
+		return (r - f + 1 + capacity) % capacity;//nÀº ¿Ö ¾ÈµÉ±î
 	}
 };
 bool arrQueue::isEmpty() {
