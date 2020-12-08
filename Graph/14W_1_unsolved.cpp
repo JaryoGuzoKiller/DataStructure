@@ -140,9 +140,10 @@ public:
 		int temp = 0;
 		int size = newlist.size();
 		vertex* u = NULL;
+		
 		for (int i = 0; i < size; i++) {
-			int min = 500;
-			for (int j = 0; j < newlist.size(); j++) {
+			min = 500;
+			for (int j = 0; j < size; j++) {
 				if (min > newlist[j]->data) {
 					min = newlist[j]->data;
 					u = newlist[j];
@@ -152,6 +153,7 @@ public:
 			sorted_queue.push(u);
 			newlist.erase(newlist.begin()+temp);
 		}
+		
 		while (!sorted_queue.empty()) {
 
 			edge* e=edgeMatrix[getXY(curV->data)][getXY(sorted_queue.front()->data)];
